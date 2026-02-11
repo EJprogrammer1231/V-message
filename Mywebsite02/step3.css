@@ -1,0 +1,101 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: bisque;
+    display: flex;
+    justify-content: center;
+  }
+  .section-step1 {
+    height: 100vh;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+  .p-1{
+    font-family: "Pinyon Script", cursive;
+    margin-bottom: 0;
+  }
+  .p-2{
+    font-size: 28px;
+    font-family: "Pinyon Script", cursive;
+    margin-top: 10px;
+  }
+  .main-class{
+    height: 20rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  input{
+    margin: 10px;
+    background: none;
+    outline-style: none;
+    border: solid 1px gray;
+    border-radius: 3px;
+    padding: 8px;
+  }
+  label{
+    font-family: "Pinyon Script", cursive;
+  }
+  button{
+    background: none;
+    outline-style: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 7px;
+    width: 6rem;
+  }
+  button:hover{
+    background-color: antiquewhite;
+  }
+  button:active{
+    background-color: rgb(255, 210, 210);
+  }
+    .displayError {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4d4f;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+ .displayDone {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ff4d4f;
+  color: white;
+  width: 320px;
+  padding: 40px 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  animation: popIn 0.3s ease-out;
+}

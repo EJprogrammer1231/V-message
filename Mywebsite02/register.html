@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="step1.css">
+</head>
+<style>
+    body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: bisque;
+    display: flex;
+    justify-content: center;
+  }
+  .section-step1 {
+    height: 100vh;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+  label{
+    margin: 10px;
+    font-family: "Pinyon Script", cursive;
+
+  }
+  input{
+    margin: 10px;
+    background: none;
+    outline-style: none;
+    border: 1px solid black;
+    padding: 5px;
+  }
+  button{
+    background: none;
+    outline-style: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 7px;
+    margin-top: 30px;
+    width: 6rem;
+  }
+  button:hover{
+    background-color: antiquewhite;
+  }
+  button:active{
+    background-color: rgb(255, 210, 210);
+  }
+</style>
+<body>
+  
+    <section class="section-step1">
+      <main>
+
+        <h2 style="font-family: Pinyon Script, cursive;">Register</h2>
+
+        <label for="name">First name</label>
+        <input type="text" name="name" id="forFirst" class="input-Color"><br>
+        <label for="name">Last name</label>
+        <input type="text" name="name" id="forLast" class="input-Color"><br>
+        <button onclick="btnRegister()">Continue</button>
+        <button onclick="clearBtn()" id="redClr">Clear</button>
+        <button onclick="notifClr()">Notif clear</button>
+
+      </main>
+
+      <div id="displayRegister" style="display: none;">
+        <p>Make sure that all field is completed thanks !!</p>
+      </div>
+
+      <div id="notNumber" style="display: none;">
+        <p>only letter not a number thanks !!</p>
+      </div>
+
+    </section>
+
+    <script>
+      function btnRegister() {
+        const fName = document.getElementById("forFirst").value;
+        const lName = document.getElementById("forLast").value;
+
+        if (fName === "") {
+          const displayError = document.getElementById("displayRegister");
+          document.getElementById("displayRegister").style.display = "Block";
+        }
+        else if (lName === "") {
+          const displayError = document.getElementById("displayRegister");
+          document.getElementById("displayRegister").style.display = "Block";
+        }
+        else if (fName >= 0) {
+          const notInt = document.getElementById("notNumber");
+          document.getElementById("notNumber").style.display = "Block"
+        }
+        else if ( lName >= 0) {
+          const notInt = document.getElementById("notNumber");
+          document.getElementById("notNumber").style.display = "Block"
+        }
+        else{ 
+          window.location.href = "step2.html";
+        }
+      }
+
+      /* CLEAR INPUT FIELD */
+      function clearBtn() {
+
+        const changeCl1 = document.getElementById("forFirst").value;
+        const changeCl2 = document.getElementById("forLast").value;
+
+        if (changeCl1 === "") {
+          document.getElementById("forFirst").style.borderColor = "red";
+        }
+        if (changeCl2 === "") {
+          document.getElementById("forLast").style.borderColor = "red";
+        }
+        else{
+          document.getElementById("forFirst").value = "";
+          document.getElementById("forLast").value = "";
+        }
+      }
+
+      /* NOTIFICATION CLEAR */
+      function notifClr() {
+        document.getElementById("displayRegister").textContent = "";
+        document.getElementById("notNumber").textContent = "";
+      }
+    </script>
+
+</body>
+</html>
