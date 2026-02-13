@@ -1,0 +1,131 @@
+  body{
+    background-color: rgb(139, 135, 135);
+  }
+  *{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  * > header{
+    font-size: 23px;
+  }
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 10px;
+    height: 5rem;
+    background-color: rgb(165, 158, 158);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .div-logo-name{
+    color: rgb(49, 48, 48);
+  }
+  span{
+    font-size: 30px;
+  }
+  .input-search{
+    border: solid 1px rgb(92, 88, 88);
+    outline: none;
+    border-radius: 50px;
+    width: 20rem;
+    background: none;
+    padding: 20px 20px 20px 20px;
+    box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  }
+  ::placeholder{
+    color: rgb(49, 48, 48);
+    font-size: 15px;
+  }
+  .search-area{
+    border: solid 1px rgb(92, 88, 88);
+    border-radius: 20px;
+    background: none;
+    padding: 10px 10px 10px 10px;
+    margin-left: 5px;
+    box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 200ms;
+    color: rgb(44, 43, 43);
+  }
+  .search-area:hover{
+    color: black;
+    background-color: rgb(143, 136, 136);
+    transform: scale(1.05);
+  }
+  ul{
+    display: flex;
+    gap: 30px;
+    padding-right: 10px;
+  }
+  li{
+    list-style: none;
+    color: rgb(49, 48, 48);
+  }
+  section{
+    border: 1px solid black;
+    height: 28rem;
+    display: grid;
+    grid-template-columns: 18rem 67rem;
+    justify-content: space-between;
+    margin-top: 15px;
+    border-radius: 10px;
+  }
+  section > div{
+    margin: 5px 5px 5px 5px;
+    border: 1px solid black;
+  }
+  .main-sidebar{
+    display: grid;
+    grid-template-rows: 40px 40px 40px 40px 40px 40px;
+    row-gap: 12px;
+    align-items: center;  
+  }
+  input{
+    border: solid 1px black;
+    border-radius: 50px;
+    width: 15rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 5px 5px 5px 5px;
+    padding-left: 13px;
+  }
+  .aside{
+    margin: 10px 10px 10px 10px;
+  }
+  .optionButton{
+    height: 110px;
+    display: grid;
+    grid-template-columns: 100px 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  button{
+    padding: 10px 10px 10px 10px;
+    background: none;
+    border: solid 1px black;
+    width: 6rem;
+    margin: 5px 5px 5px 5px;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+  }
+  button:hover{
+    color: black;
+    background-color: rgb(94, 90, 90);
+    transform: scale(1.05);
+  }
+  th{
+    border: solid 1px black;
+    height: 20px;
+    padding: 15px 15px 15px 15px;
+  }
+  td{
+    border: solid 1px black;
+    height: 15px;
+    width: 9rem;
+    padding: 15px 15px 15px 15px;
+  }

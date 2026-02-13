@@ -1,0 +1,132 @@
+  *{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+  }
+  body{
+    background-color: rgb(26, 94, 221);
+  }
+  header{
+    display: flex;
+    justify-content: center;
+    height: 5rem;align-items: center;
+    background-color: rgb(166, 183, 240);
+  }
+  .logo{
+    width: 10rem;
+    margin: 10px 10px 10px 10px;
+    display: flex;
+    justify-content: end;
+  }
+  .title{
+    width: 25rem;
+    margin: 10px 10px 10px 10px;
+    color: rgb(44, 43, 43);
+    font-size: 20px;
+  }
+  img{
+    width: 55px;
+    height: 56px;
+  }
+  section{
+    height: 30rem;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    border-radius: 20px;
+    background-color: rgb(166, 183, 240);
+    display: flex;
+    justify-content: space-evenly;
+  }
+  section > div{
+    width: 30rem;
+    border: solid 1px rgb(70, 68, 68);
+    margin: 5px 5px 5px 5px;
+    border-radius: 20px;
+  }
+  footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 67px;
+    color: rgb(61, 59, 59);
+  }
+  .fillArea{
+    text-align: center;
+    border: solid 1px rgb(70, 68, 68);
+    border-radius: 20px;
+    padding: 20px 20px 20px 20px;
+    margin: 5px 5px 5px 5px;
+    font-size: 20px;
+    background-color: rgb(156, 156, 252);
+  }
+  .inputArea{
+    border: solid 1px rgb(70, 68, 68);
+    border-radius: 5px;
+    padding: 20px 20px 20px 20px;
+    margin: 5px 5px 5px 5px;
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(156, 156, 252);
+    margin-top: 18px;
+  }
+  .main-area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px rgb(70, 68, 68);
+    border-radius: 10px;
+    padding: 50px;
+    background-color: rgb(166, 183, 240);
+  }
+  input{
+    background: none;
+    border: solid 1px rgb(70, 68, 68);
+    outline: none ;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  ::placeholder{
+    color: rgb(70, 68, 68);
+  }
+    table{
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    display: flex;
+    height: 25rem;
+  }
+  th{
+    border: solid 1px rgb(70, 68, 68);
+    border-radius: 10px;
+    height: 20px;
+    padding: 15px; 
+  }
+  td{ 
+     border-radius: 3px;
+     border: solid 1px rgb(70, 68, 68);
+     width: 148px;
+     text-align: center;
+     height: 32px;  
+   }
+   .container-item{
+    padding: 20px;
+   }
+   button{
+    background: none;
+    border: solid 1px rgb(70, 68, 68);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    background-color: rgb(156, 156, 252);
+   }
+   button:hover{
+    background-color: gray;
+   }
+   button:active{
+    background-color: rgb(48, 47, 47);
+   }
