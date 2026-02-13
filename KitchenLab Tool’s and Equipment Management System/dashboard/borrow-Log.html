@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borrow and Return Log</title>
+  <link rel="stylesheet" href="buy-style.css">
+</head>
+<body>
+
+  <section>
+
+    <header>
+      Buy item
+      <form action="Return-Log.html">
+        <button class="return-btn">Return item</button>
+      </form>
+    </header>
+
+    <form id="buyForm">
+      <div class="field-group">
+        <label for="name">Name</label>
+        <input type="text" id="name">
+      </div>
+
+      <div class="field-group">
+        <label for="item">Item</label>
+        <input type="text" id="item">
+      </div>
+
+      <div class="field-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity">
+      </div>
+
+      <div class="field-group">
+        <label for="available">Available</label>
+        <select id="available">
+          <option value="" selected disabled hidden>Select item</option>
+          <option value="Knife">Knife</option>
+          <option value="Spoons">Spoons</option>
+          <option value="Plate">Plate</option>
+          <option value="Cups">Cups</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="actions">
+      <form action="history-buy.html">
+        <button class="btn history-btn">History Inventory</button>
+      </form>
+      <button class="btn buy-btn" id="buyBtn">Buy now</button>
+    </div>
+
+  </section>
+  
+  <script>
+    document.getElementById("buyBtn").addEventListener("click", function () {
+
+      const name = document.getElementById("name").value.trim();
+      const item = document.getElementById("item").value.trim();
+      const quantity = document.getElementById("quantity").value.trim();
+      const available = document.getElementById("available").value;
+
+      if (!name || !item || !quantity || !available) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      // Create inventory object
+      const entry = {
+        name,
+        item,
+        quantity,
+        available,
+        date: new Date().toLocaleString()
+      };
+
+      // Fetch existing history or create new array
+      let history = JSON.parse(localStorage.getItem("inventoryHistory")) || [];
+
+      // Add new entry
+      history.push(entry);
+
+      // Save back to local storage
+      localStorage.setItem("inventoryHistory", JSON.stringify(history));
+
+      // Redirect to history page
+      window.location.href = "history-buy.html";
+    });
+  </script>
+
+</body>
+</html>
