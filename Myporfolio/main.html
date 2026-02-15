@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body{
+    display: flex;
+    justify-content: center;
+    height: 140vh;
+  }
+  .Main-conatianer{
+   
+    width: 50rem;
+    padding: 32px 16px;
+    grid-template-columns: 160px 200px;
+  }
+  .container-header{
+    
+    height: 160px;
+    display: flex;
+    
+  }
+  img {
+    height: 160px;
+    width: 160px;
+    
+  }
+  .inside-header-descrip{
+    margin-left: 20px;
+  }
+  .location{
+    display: flex;
+    align-items: center;
+    gap: 6px;        
+    margin: 2px 0px 0px;
+  }
+  .img-button-head{
+    height: .75rem;
+    width: .75rem;
+  }
+  button{
+    height: 2rem;
+    width: 40px;
+    border: none;
+    line-height: 2rem;
+    background-color: rgb(223, 221, 221);
+  }
+  .head-btn{
+    display: flex;
+    align-items: center;
+    gap: 22.6rem; 
+  }
+  .header-name-owner{
+    display: flex;
+    align-items: center;
+  }
+  .list-certif{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    margin: 8px 0px 0px;
+    align-items: center;
+  }
+  .selectem{
+    outline: none;
+    border: none;
+    color: #ffff;
+    background-color: rgb(99, 99, 216);
+    padding: 5px;
+  }
+  .btn-for-sched{
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  .btn-sched{
+    width: 10rem;
+    background-color: black;
+    color: #ffff;
+    margin-top: 25px;
+  }
+  .nested-img-link{
+    width: 13px;
+    height: 13px;
+    margin-top: 4px;
+  }
+  .nested-btn-sched{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    margin-left: 30px;
+  }
+  .nested-a-tag{
+    margin-left: 8px;
+    text-decoration: none;
+    color: black;
+    margin-top: 0;
+  }
+</style>
+<body>
+  <section class="Main-conatianer">
+    <header class="container-header">
+      <div>
+        <img src="dba53b4a-c34f-48f2-ae6d-97011ba49fd2.jpg" alt="error">
+      </div>
+
+      <div class="inside-header-descrip">
+
+       <div class="head-btn">
+        <div class="header-name-owner" style="font-size: 1.5rem; line-height: 2rem; font: bold-bold truncate;">
+          <div>Eljay Bernaldez</div>
+          <img style="width: 15px; height: 15px; margin-left: 12px; margin-top: 3px;" src="—Pngtree—instagram bule tick insta blue_9074860.png" alt="error">
+        </div>
+        <button><img class="img-button-head" src="light.png" alt="error"></button>
+       </div>
+
+       <div class="location">
+        <img style="width: 15px; height: 15px;" src="location-pin.png" alt=""><span>Antipolo City Rizal<span></span>
+       </div>
+
+       <div class="list-certif">
+        <p style="font-size: 17px;">AI / Softtware Enginner / Content Creator</p>
+        <select name="achiev" id="selection" class="selectem">
+          <option>Current achievments</option>
+          <option>2026 Scas css champion</option>
+          <option>2026 Scas javascript champion</option>
+        </select>
+       </div>
+
+       <div class="btn-for-sched">
+         <button class="btn-sched">Schedule a Call</button>
+
+         <div class="nested-btn-sched">
+          <div>
+            <img class="nested-img-link" src="mail.png" alt="error">
+          </div>
+          <div>
+            <a class="nested-a-tag" href="email">Send Email</a>
+          </div>
+         </div>
+
+         <div class="nested-btn-sched">
+          <div>
+            <img class="nested-img-link" src="blogger.png" alt="error">
+          </div>
+          <div>
+            <a class="nested-a-tag" href="email">Read my Blog</a>
+          </div>
+         </div>
+         <div style="margin-left: 8rem; margin-top: 25px;">
+          <a style="text-decoration: none; font-weight: bolder; font-size: 21px; color: black;" href="url">&gt;</a>
+        </div>
+       </div>
+
+      </div>
+    </header>
+
+    <section class="section-body-content">
+      <div class="nested-body" style="width: 29rem;">
+        <h2 style="padding: 10px; margin-top: 40px;">About</h2>
+        <div style="padding: 10px; padding-left: 10px;">
+            <p class="p-descrip">
+              I'm a full-stack software engineer specializing in developing solutions with JavaScript, Python, and PHP. I work on projects including building modern web applications, mobile apps, search engine optimization, digital marketing, and making code tutorials.
+            </p><br>
+
+            <p class="p-descrip">
+              I've helped startups and MSMEs grow and streamline their processes through software solutions. I've also built a community of over 200,000 developers sharing knowledge and mentorship.
+            </p><br>
+
+            <p class="p-descrip">
+              Lately, I've been diving deeper into the world of artificial intelligence, focusing on integrating AI tools and techniques into modern applications. My work now includes developing AI-powered solutions, creating intelligent applications, and leveraging generative AI to optimize development workflows and deliver cutting-edge technology.
+            </p>
+        </div>
+      </div>
+      <div class="nested-body" style="width: 17rem;">
+        <img style="margin-top: 40px; width: 21rem; height: 21rem;" src="0ef0ed68-460d-4353-9b6c-2466496e3ef8.jpg" alt="">
+      </div>
+    </section>
+
+  </section>
+</body>
+<style>
+.section-body-content{
+  
+  height: 100vh;
+}
+.section-body-content{
+  display: flex;
+  justify-content: space-between;
+}
+.nested-body{
+  width: 20rem;
+  
+}
+.p-descrip{
+  font-size: 16.5px;
+  color: #000;
+}
+</style>
+</html>
