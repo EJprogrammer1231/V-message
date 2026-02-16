@@ -1,0 +1,45 @@
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  section{
+    border: solid 1px black;
+    width: 30rem;
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  h1{
+    margin-bottom: 10px;
+  }
+  hr{
+    margin-bottom: 20px;
+  }
+  div{
+    text-align: center;
+  }
+  input{
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  label{
+    font-size: 17px;
+  }
+  button {
+    padding: 8px;
+    cursor: pointer;
+    background-color: black;
+    outline-style: none;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+  }
