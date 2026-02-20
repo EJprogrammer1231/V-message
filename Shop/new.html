@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tip Calculator</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input {
+      padding: 5px;
+      font-size: 16px;
+      width: 150px;
+      margin: 5px;
+    }
+    button {
+      padding: 6px 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    p {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Tip Calculator</h2>
+
+  <input type="number" id="billInput" placeholder="Enter bill amount">
+  <input type="number" id="tipInput" placeholder="Tip %">
+  <button id="calculateBtn">Calculate Tip</button>
+
+  <p id="result"></p>
+
+  <script>
+    const billInput = document.getElementById("billInput");
+    const tipInput = document.getElementById("tipInput");
+    const calculateBtn = document.getElementById("calculateBtn");
+    const result = document.getElementById("result");
+
+    calculateBtn.addEventListener("click", function() {
+      const bill = Number(billInput.value);
+      const tipPercent = Number(tipInput.value);
+
+      // Validate inputs
+      if (isNaN(bill) || bill <= 0) {
+        result.textContent = "Please enter a valid bill amount!";
+        return;
+      }
+      if (isNaN(tipPercent) || tipPercent < 0) {
+        result.textContent = "Please enter a valid tip percentage!";
+        return;
+      }
+
+      const tipAmount = bill * (tipPercent / 100);
+      const total = bill + tipAmount;
+
+      result.textContent = `Tip: $${tipAmount.toFixed(2)}, Total: $${total.toFixed(2)}`;
+    });
+  </script>
+
+</body>
+</html> 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple To-Do List</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #taskInput {
+      width: 200px;
+      padding: 5px;
+      font-size: 16px;
+    }
+    button {
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+    ul {
+      list-style-type: disc;
+      margin-top: 20px;
+      padding-left: 0;
+    }
+    li {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+    .deleteBtn {
+      margin-left: 10px;
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>My To-Do List</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter a task">
+  <button id="addBtn">Add Task</button>
+
+  <ul id="taskList">
+    <!-- Tasks will appear here -->
+  </ul>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const addBtn = document.getElementById("addBtn");
+    const taskList = document.getElementById("taskList");
+
+    addBtn.addEventListener("click", function() {
+      const taskText = taskInput.value.trim(); // Get input and remove extra spaces
+      if (taskText === "") return; // Do nothing if input is empty
+
+      // Create new list item
+      const li = document.createElement("li");
+      li.textContent = taskText;
+
+      // Optional: Add delete button
+      const deleteBtn = document.createElement("span");
+      deleteBtn.textContent = "❌";
+      deleteBtn.className = "deleteBtn";
+      deleteBtn.addEventListener("click", function() {
+        li.remove();
+      });
+
+      li.appendChild(deleteBtn);
+      taskList.appendChild(li);
+
+      taskInput.value = ""; // Clear input after adding
+    });
+  </script>
+
+</body>
+</html>

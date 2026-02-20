@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Age Checker</title>
+</head>
+<body>
+
+  <h2>Check Your Age</h2>
+
+  <input type="number" id="ageInput" placeholder="Enter your age">
+  <button id="checkBtn">Check Age</button>
+
+  <p id="result"></p>
+
+  <script>
+    const button = document.getElementById("checkBtn");
+    const input = document.getElementById("ageInput");
+    const result = document.getElementById("result");
+
+    button.addEventListener("click", function() {
+      const checkAge = input.value.trim();
+
+      if (checkAge < 18) {
+        result.textContent = "You are a minor";
+      }
+      else{
+        result.textContent = "You are an adult";
+      }
+    })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">random color</button>
+
+  <script>
+    const btn =  document.getElementById("btn");
+
+    btn.addEventListener("click",function() {
+      const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+      document.body.style.backgroundColor = randomColor;
+    })
+  </script>
+</body>
+</html>

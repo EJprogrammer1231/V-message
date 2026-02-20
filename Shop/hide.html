@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Hide Text</title>
+</head>
+<body>
+
+  <h2 id="message">Hello! I am visible 👋</h2>
+
+  <button id="toggleBtn">Hide</button>
+
+  <script>
+    const btn = document.getElementById("toggleBtn");
+    const message = document.getElementById("message");
+
+    btn.addEventListener("click",function() {
+      if (message.style.display === "none") {
+        message.style.display = "block";
+        btn.textContent = "Hide";
+      }else {
+        message.style.display = "none";
+        btn.textContent = "Show";
+      }
+    })
+  </script>
+
+</body>
+</html>

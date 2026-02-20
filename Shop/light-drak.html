@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Light/Dark Mode Toggle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Light / Dark Mode Toggle</h2>
+  <button id="modeBtn">Switch to Dark Mode</button>
+
+  <p>This is some sample text to see the color change.</p>
+
+  <script>
+    const btn = document.getElementById("modeBtn");
+    let isDark = false; // Track current mode
+
+    btn.addEventListener("click", function() {
+      if (!isDark) {
+        // Switch to dark mode
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+        btn.textContent = "Switch to Light Mode";
+        isDark = true;  
+      } else {
+        // Switch back to light mode
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+        btn.textContent = "Switch to Dark Mode";
+        isDark = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
