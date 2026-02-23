@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - LMS</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <!-- HEADER & NAVIGATION -->
+  <header>
+    <nav class="navbar">
+      <a href="../index.html" class="logo">📚 LMS Admin</a>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#" onclick="loadAdminSection('dashboard')">Dashboard</a></li>
+        <li><a href="#" onclick="loadAdminSection('books')">Manage Books</a></li>
+        <li><a href="#" onclick="loadAdminSection('users')">Manage Users</a></li>
+        <li><a href="#" onclick="loadAdminSection('requests')">Borrow Requests</a></li>
+      </ul>
+
+      <div class="nav-buttons" id="navButtons">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
+        <a href="#" onclick="adminLogout()" class="btn-logout">Logout</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="container" style="margin-top: 30px; margin-bottom: 40px;">
+    
+    <!-- DASHBOARD OVERVIEW -->
+    <section id="dashboardSection" class="section-content">
+      <div class="dashboard-header">
+        <div>
+          <h1 style="font-size: 32px; margin-bottom: 5px;">Admin Dashboard 👨‍💼</h1>
+          <p style="color: #999;">System Overview & Statistics</p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-label">Total Users</div>
+          <div class="stat-value" id="totalUsers">0</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">Total Books</div>
+          <div class="stat-value" id="totalBooks">0</div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-label">Books Borrowed</div>
+          <div class="stat-value" id="totalBorrowed">0</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-label">Pending Requests</div>
+          <div class="stat-value" id="pendingRequests">0</div>
+        </div>
+      </div>
+
+      <div id="alertContainer"></div>
+    </section>
+
+    <!-- MANAGE BOOKS SECTION -->
+    <section id="booksSection" class="section-content hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+        <h2 class="section-title">Manage Library Books</h2>
+        <button class="btn btn-primary" onclick="openAddBookModal()">+ Add New Book</button>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-group">
+          <label>Category:</label>
+          <select id="adminCategoryFilter" onchange="filterAdminBooks()">
+            <option value="">All Categories</option>
+            <option value="IT">IT & Technology</option>
+            <option value="Science">Science</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Business">Business</option>
+            <option value="Arts">Arts & Humanities</option>
+            <option value="Medical">Medical/Health</option>
+            <option value="Education">Education</option>
+            <option value="Law">Law</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Search:</label>
+          <input type="text" id="adminSearchInput" placeholder="Search books..." onkeyup="filterAdminBooks()">
+        </div>
+      </div>
+
+      <table id="booksTable">
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>ISBN</th>
+            <th>Available</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="booksTableBody">
+          <!-- Books will be listed here -->
+        </tbody>
+      </table>
+
+      <div id="emptyBooks" class="empty-state hidden">
+        <div class="empty-icon">📖</div>
+        <div class="empty-title">No Books in Library</div>
+        <div class="empty-message">Start by adding books to your library</div>
+        <button class="btn btn-primary" onclick="openAddBookModal()">Add First Book</button>
+      </div>
+    </section>
+
+    <!-- MANAGE USERS SECTION -->
+    <section id="usersSection" class="section-content hidden">
+      <h2 class="section-title mb-40">Manage System Users</h2>
+
+      <div class="filter-section">
+        <div class="filter-group">
+          <label>Field of Study:</label>
+          <select id="fieldFilter" onchange="filterAdminUsers()">
+            <option value="">All Fields</option>
+            <option value="IT">IT & Technology</option>
+            <option value="Science">Science</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Business">Business</option>
+            <option value="Arts">Arts & Humanities</option>
+            <option value="Medical">Medical/Health</option>
+            <option value="Education">Education</option>
+            <option value="Law">Law</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Search:</label>
+          <input type="text" id="adminUserSearch" placeholder="Search users..." onkeyup="filterAdminUsers()">
+        </div>
+      </div>
+
+      <table id="usersTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Field</th>
+            <th>Member Since</th>
+            <th>Books Borrowed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="usersTableBody">
+          <!-- Users will be listed here -->
+        </tbody>
+      </table>
+
+      <div id="emptyUsers" class="empty-state hidden">
+        <div class="empty-icon">👥</div>
+        <div class="empty-title">No Users Found</div>
+        <div class="empty-message">No users registered yet</div>
+      </div>
+    </section>
+
+    <!-- BORROW REQUESTS SECTION -->
+    <section id="requestsSection" class="section-content hidden">
+      <h2 class="section-title mb-40">Book Borrow Requests</h2>
+
+      <table id="requestsTable">
+        <thead>
+          <tr>
+            <th>User Name</th>
+            <th>Book Title</th>
+            <th>Request Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="requestsTableBody">
+          <!-- Requests will be listed here -->
+        </tbody>
+      </table>
+
+      <div id="emptyRequests" class="empty-state hidden">
+        <div class="empty-icon">📋</div>
+        <div class="empty-title">No Requests</div>
+        <div class="empty-message">All book requests have been processed</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 LMS Admin Panel. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ADD/EDIT BOOK MODAL -->
+  <div class="modal" id="bookModal">
+    <div class="modal-content" style="max-width: 600px;">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h2 style="margin-bottom: 20px;" id="bookModalTitle">Add New Book</h2>
+      
+      <form id="bookForm">
+        <div class="form-group">
+          <label for="bookTitle">Book Title</label>
+          <input type="text" id="bookTitle" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bookAuthor">Author Name</label>
+          <input type="text" id="bookAuthor" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bookIsbn">ISBN</label>
+          <input type="text" id="bookIsbn" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bookCategory">Category</label>
+          <select id="bookCategory" required>
+            <option value="">Select Category</option>
+            <option value="IT">IT & Technology</option>
+            <option value="Science">Science</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Business">Business</option>
+            <option value="Arts">Arts & Humanities</option>
+            <option value="Medical">Medical/Health</option>
+            <option value="Education">Education</option>
+            <option value="Law">Law</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bookTotal">Total Copies</label>
+          <input type="number" id="bookTotal" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bookAvailable">Available Copies</label>
+          <input type="number" id="bookAvailable" min="0" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Book</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/books.js"></script>
+  <script>
+    // Verify admin access on page load
+    window.addEventListener('load', function() {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (!currentUser || currentUser.role !== 'admin') {
+        window.location.href = '../login.html';
+        return;
+      }
+
+      loadAdminDashboard();
+      loadAdminBooks();
+      loadAdminUsers();
+      loadBorrowRequests();
+    });
+
+    function loadAdminDashboard() {
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const books = JSON.parse(localStorage.getItem('books')) || [];
+      
+      let totalBorrowed = 0;
+      users.forEach(user => {
+        if (user.borrowedBooks) {
+          totalBorrowed += user.borrowedBooks.length;
+        }
+      });
+
+      document.getElementById('totalUsers').textContent = users.length;
+      document.getElementById('totalBooks').textContent = books.length;
+      document.getElementById('totalBorrowed').textContent = totalBorrowed;
+      document.getElementById('pendingRequests').textContent = '0';
+    }
+
+    function loadAdminBooks() {
+      const books = JSON.parse(localStorage.getItem('books')) || [];
+      const tbody = document.getElementById('booksTableBody');
+      const emptyBooks = document.getElementById('emptyBooks');
+
+      if (books.length === 0) {
+        emptyBooks.classList.remove('hidden');
+        tbody.innerHTML = '';
+        return;
+      }
+
+      emptyBooks.classList.add('hidden');
+      tbody.innerHTML = books.map(book => `
+        <tr>
+          <td><strong>${book.title}</strong></td>
+          <td>${book.author}</td>
+          <td><span class="book-category">${book.category}</span></td>
+          <td>${book.isbn}</td>
+          <td>${book.available}</td>
+          <td>${book.total}</td>
+          <td>
+            <button class="btn btn-small btn-secondary" onclick="editBook(${book.id})">Edit</button>
+            <button class="btn btn-small btn-danger" onclick="deleteBook(${book.id})">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function loadAdminUsers() {
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const tbody = document.getElementById('usersTableBody');
+      const emptyUsers = document.getElementById('emptyUsers');
+
+      const nonAdminUsers = users.filter(u => u.role !== 'admin');
+
+      if (nonAdminUsers.length === 0) {
+        emptyUsers.classList.remove('hidden');
+        tbody.innerHTML = '';
+        return;
+      }
+
+      emptyUsers.classList.add('hidden');
+      tbody.innerHTML = nonAdminUsers.map(user => `
+        <tr>
+          <td>${user.fullname}</td>
+          <td>${user.email}</td>
+          <td>${user.field}</td>
+          <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+          <td>${user.borrowedBooks?.length || 0}</td>
+          <td>
+            <button class="btn btn-small btn-danger" onclick="removeUser(${user.id})">Remove</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function loadBorrowRequests() {
+      const tbody = document.getElementById('requestsTableBody');
+      const emptyRequests = document.getElementById('emptyRequests');
+      
+      tbody.innerHTML = '';
+      emptyRequests.classList.remove('hidden');
+    }
+
+    function loadAdminSection(section) {
+      document.querySelectorAll('.section-content').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+
+      if (section === 'dashboard') {
+        document.getElementById('dashboardSection').classList.remove('hidden');
+      } else if (section === 'books') {
+        document.getElementById('booksSection').classList.remove('hidden');
+      } else if (section === 'users') {
+        document.getElementById('usersSection').classList.remove('hidden');
+      } else if (section === 'requests') {
+        document.getElementById('requestsSection').classList.remove('hidden');
+      }
+    }
+
+    function openAddBookModal() {
+      document.getElementById('bookModalTitle').textContent = 'Add New Book';
+      document.getElementById('bookForm').reset();
+      document.getElementById('bookModal').classList.add('show');
+    }
+
+    function closeModal() {
+      document.getElementById('bookModal').classList.remove('show');
+    }
+
+    function editBook(id) {
+      const books = JSON.parse(localStorage.getItem('books')) || [];
+      const book = books.find(b => b.id === id);
+      
+      if (book) {
+        document.getElementById('bookModalTitle').textContent = 'Edit Book';
+        document.getElementById('bookTitle').value = book.title;
+        document.getElementById('bookAuthor').value = book.author;
+        document.getElementById('bookIsbn').value = book.isbn;
+        document.getElementById('bookCategory').value = book.category;
+        document.getElementById('bookTotal').value = book.total;
+        document.getElementById('bookAvailable').value = book.available;
+        
+        document.getElementById('bookForm').onsubmit = function(e) {
+          e.preventDefault();
+          saveBook(id);
+        };
+        
+        document.getElementById('bookModal').classList.add('show');
+      }
+    }
+
+    function deleteBook(id) {
+      if (confirm('Are you sure you want to delete this book?')) {
+        let books = JSON.parse(localStorage.getItem('books')) || [];
+        books = books.filter(b => b.id !== id);
+        localStorage.setItem('books', JSON.stringify(books));
+        loadAdminBooks();
+        showAlert('Book deleted successfully!', 'success');
+      }
+    }
+
+    function removeUser(id) {
+      if (confirm('Are you sure you want to remove this user?')) {
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users = users.filter(u => u.id !== id);
+        localStorage.setItem('users', JSON.stringify(users));
+        loadAdminUsers();
+        loadAdminDashboard();
+        showAlert('User removed successfully!', 'success');
+      }
+    }
+
+    function filterAdminBooks() {
+      // Books filtering logic
+    }
+
+    function filterAdminUsers() {
+      // Users filtering logic
+    }
+
+    function adminLogout() {
+      localStorage.removeItem('currentUser');
+      window.location.href = '../index.html';
+    }
+
+    function showAlert(message, type) {
+      const alertContainer = document.getElementById('alertContainer');
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      alertContainer.innerHTML = '';
+      alertContainer.appendChild(alert);
+      
+      setTimeout(() => alert.remove(), 3000);
+    }
+
+    // Book form submission
+    document.getElementById('bookForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      saveBook();
+    });
+
+    function saveBook(id = null) {
+      let books = JSON.parse(localStorage.getItem('books')) || [];
+      
+      const bookData = {
+        id: id || Date.now(),
+        title: document.getElementById('bookTitle').value,
+        author: document.getElementById('bookAuthor').value,
+        isbn: document.getElementById('bookIsbn').value,
+        category: document.getElementById('bookCategory').value,
+        total: parseInt(document.getElementById('bookTotal').value),
+        available: parseInt(document.getElementById('bookAvailable').value),
+        rating: 4.5,
+        createdAt: new Date().toISOString()
+      };
+
+      if (id) {
+        const index = books.findIndex(b => b.id === id);
+        if (index !== -1) {
+          books[index] = bookData;
+        }
+      } else {
+        books.push(bookData);
+      }
+
+      localStorage.setItem('books', JSON.stringify(books));
+      closeModal();
+      loadAdminBooks();
+      loadAdminDashboard();
+      showAlert(id ? 'Book updated successfully!' : 'Book added successfully!', 'success');
+    }
+  </script>
+</body>
+</html>

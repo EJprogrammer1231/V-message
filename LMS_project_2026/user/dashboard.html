@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - LMS</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <!-- HEADER & NAVIGATION -->
+  <header>
+    <nav class="navbar">
+      <a href="../index.html" class="logo">📚 LMS</a>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#" onclick="loadSection('books')">Browse Books</a></li>
+        <li><a href="#" onclick="loadSection('borrowed')">My Books</a></li>
+        <li><a href="#" onclick="loadSection('music')">Music Room</a></li>
+        <li><a href="#" onclick="loadSection('profile')">Profile</a></li>
+      </ul>
+
+      <div class="nav-buttons" id="navButtons">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
+        <a href="#" onclick="logout()" class="btn-logout">Logout</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="container" style="margin-top: 30px; margin-bottom: 40px;">
+    
+    <!-- DASHBOARD HEADER -->
+    <div class="dashboard-header">
+      <div>
+        <h1 style="font-size: 32px; margin-bottom: 5px;">Welcome, <span id="userName">User</span>! 👋</h1>
+        <p style="color: #999;">Your field of study: <strong id="userField">-</strong></p>
+      </div>
+    </div>
+
+    <!-- STATISTICS -->
+    <div class="stats-grid">
+      <div class="stat-card blue">
+        <div class="stat-label">Books Borrowed</div>
+        <div class="stat-value" id="borrowedCount">0</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Books Available</div>
+        <div class="stat-value" id="availableCount">0</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">Favorite Books</div>
+        <div class="stat-value" id="favCount">0</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-label">Days Remaining</div>
+        <div class="stat-value">14</div>
+      </div>
+    </div>
+
+    <!-- ALERT CONTAINER -->
+    <div id="alertContainer"></div>
+
+    <!-- BOOKS SECTION -->
+    <section id="booksSection" class="section-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+        <h2 class="section-title">Browse Books - Your Field</h2>
+        <div class="dashboard-search">
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search books..."
+          >
+          <button onclick="searchBooks()">Search</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-group">
+          <label>Category:</label>
+          <select id="categoryFilter" onchange="filterBooks()">
+            <option value="">All Books</option>
+            <option value="IT">IT & Technology</option>
+            <option value="Science">Science</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Business">Business</option>
+            <option value="Arts">Arts & Humanities</option>
+            <option value="Medical">Medical/Health</option>
+            <option value="Education">Education</option>
+            <option value="Law">Law</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Sort By:</label>
+          <select id="sortFilter" onchange="sortBooks()">
+            <option value="newest">Newest First</option>
+            <option value="popular">Most Popular</option>
+            <option value="rating">Highest Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="books-grid" id="booksGrid">
+        <!-- Books will be loaded here -->
+      </div>
+    </section>
+
+    <!-- BORROWED BOOKS SECTION -->
+    <section id="borrowedSection" class="section-content hidden">
+      <h2 class="section-title mb-40">My Borrowed Books</h2>
+      
+      <table id="borrowedTable">
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Borrowed Date</th>
+            <th>Return Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="borrowedTableBody">
+          <!-- Borrowed books will be listed here -->
+        </tbody>
+      </table>
+
+      <div id="emptyBorrowed" class="empty-state hidden">
+        <div class="empty-icon">📚</div>
+        <div class="empty-title">No Books Borrowed Yet</div>
+        <div class="empty-message">Start borrowing books to see them here!</div>
+        <button class="btn btn-primary" onclick="loadSection('books')">Browse Books</button>
+      </div>
+    </section>
+
+    <!-- MUSIC ROOM SECTION -->
+    <section id="musicSection" class="section-content hidden">
+      <h2 class="section-title mb-40">Relaxation Music Room 🎵</h2>
+      <p style="text-align: center; color: #999; margin-bottom: 30px;">
+        Play some soothing background music while you study or read
+      </p>
+
+      <div class="music-player">
+        <div class="player-cover">🎵</div>
+        
+        <div class="player-info">
+          <div class="player-title" id="playerTitle">Ambient Study Music</div>
+          <div class="player-artist" id="playerArtist">LMS Collection</div>
+        </div>
+
+        <div class="player-progress">
+          <div class="progress-bar" id="progressBar" onclick="seek(event)">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-time">
+            <span id="currentTime">0:00</span>
+            <span id="duration">3:45</span>
+          </div>
+        </div>
+
+        <div class="player-controls">
+          <button class="control-btn" onclick="previousTrack()">⏮️</button>
+          <button class="control-btn play" id="playBtn" onclick="togglePlay()">▶️</button>
+          <button class="control-btn" onclick="nextTrack()">⏭️</button>
+        </div>
+
+        <div style="margin-top: 15px; margin-bottom: 15px;">
+          <label style="display: block; margin-bottom: 10px; font-weight: 600;">Volume</label>
+          <input type="range" id="volumeSlider" min="0" max="100" value="70" onchange="setVolume(this.value)" style="width: 100%; cursor: pointer;">
+        </div>
+
+        <div class="playlist">
+          <h4 style="margin-bottom: 15px; font-weight: 600;">Playlist</h4>
+          <div id="playlistContainer">
+            <!-- Playlist items will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE SECTION -->
+    <section id="profileSection" class="section-content hidden">
+      <h2 class="section-title mb-40">My Profile</h2>
+      
+      <div class="card" style="max-width: 600px; margin: 0 auto;">
+        <div class="card-content">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="profileName" readonly style="background-color: var(--light-color);">
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="profileEmail" readonly style="background-color: var(--light-color);">
+          </div>
+
+          <div class="form-group">
+            <label>Field of Study</label>
+            <input type="text" id="profileField" readonly style="background-color: var(--light-color);">
+          </div>
+
+          <div class="form-group">
+            <label>Member Since</label>
+            <input type="text" id="profileJoined" readonly style="background-color: var(--light-color);">
+          </div>
+
+          <div class="form-group">
+            <label>New Password (Optional)</label>
+            <input type="password" id="newPassword" placeholder="Leave blank to keep current password">
+          </div>
+
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" id="confirmNewPassword" placeholder="Confirm new password">
+          </div>
+
+          <button class="btn btn-primary" onclick="updateProfile()" style="width: 100%; margin-top: 20px;">Save Changes</button>
+          <button class="btn btn-danger" onclick="deleteAccount()" style="width: 100%; margin-top: 10px;">Delete Account</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 LMS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- BOOK DETAIL MODAL -->
+  <div class="modal" id="bookModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalBody">
+        <!-- Book details will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/books.js"></script>
+  <script src="../js/music.js"></script>
+  <script>
+    // Load user data on page load
+    window.addEventListener('load', function() {
+      loadUserData();
+      loadBooks();
+      // Music playlist will only load when user clicks on Music Room
+      updateStats();
+    });
+
+    function loadUserData() {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (!currentUser) {
+        window.location.href = '../login.html';
+        return;
+      }
+
+      document.getElementById('userName').textContent = currentUser.fullname;
+      document.getElementById('userField').textContent = currentUser.field || 'Not specified';
+      
+      document.getElementById('profileName').value = currentUser.fullname;
+      document.getElementById('profileEmail').value = currentUser.email;
+      document.getElementById('profileField').value = currentUser.field;
+      document.getElementById('profileJoined').value = new Date(currentUser.createdAt).toLocaleDateString();
+    }
+
+    function loadSection(section) {
+      document.querySelectorAll('.section-content').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+
+      if (section === 'books') {
+        document.getElementById('booksSection').classList.remove('hidden');
+      } else if (section === 'borrowed') {
+        document.getElementById('borrowedSection').classList.remove('hidden');
+        loadBorrowedBooks();
+      } else if (section === 'music') {
+        document.getElementById('musicSection').classList.remove('hidden');
+        // Load music only when user explicitly opens the music section
+        loadMusicPlaylist();
+      } else if (section === 'profile') {
+        document.getElementById('profileSection').classList.remove('hidden');
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('currentUser');
+      window.location.href = '../index.html';
+    }
+
+    function updateProfile() {
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmNewPassword').value;
+
+      if (newPassword && confirmPassword !== newPassword) {
+        showAlert('Passwords do not match', 'error');
+        return;
+      }
+
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      
+      if (newPassword) {
+        currentUser.password = newPassword;
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userIndex = users.findIndex(u => u.id === currentUser.id);
+        if (userIndex !== -1) {
+          users[userIndex].password = newPassword;
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+      }
+
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      showAlert('Profile updated successfully!', 'success');
+      
+      document.getElementById('newPassword').value = '';
+      document.getElementById('confirmNewPassword').value = '';
+    }
+
+    function deleteAccount() {
+      if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        
+        users = users.filter(u => u.id !== currentUser.id);
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.removeItem('currentUser');
+        
+        window.location.href = '../index.html';
+      }
+    }
+
+    function showAlert(message, type) {
+      const alertContainer = document.getElementById('alertContainer');
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      alertContainer.innerHTML = '';
+      alertContainer.appendChild(alert);
+      
+      setTimeout(() => alert.remove(), 3000);
+    }
+  </script>
+</body>
+</html>

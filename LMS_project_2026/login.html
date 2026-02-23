@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - LMS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- HEADER & NAVIGATION -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">📚 LMS</a>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#features">Features</a></li>
+      </ul>
+
+      <div class="nav-buttons" id="navButtons">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
+        <a href="register.html" class="btn-register">Sign Up</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- LOGIN FORM -->
+  <div class="container">
+    <div class="auth-container">
+      <h1 class="auth-title">Welcome Back</h1>
+      
+      <div id="alertContainer"></div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="you@example.com" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Enter your password" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label style="display: flex; align-items: center; font-weight: normal;">
+            <input type="checkbox" id="remember" name="remember" style="width: auto; margin-right: 8px;">
+            Remember me on this device
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Your Account</button>
+      </form>
+
+      <div class="auth-toggle">
+        Don't have an account? <a href="register.html">Create one now</a>
+      </div>
+
+      <div class="auth-toggle" style="margin-top: 30px; font-size: 12px;">
+        <a href="#">Forgot your password?</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 LMS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // Login Form Handler
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('remember').checked;
+      
+      // Retrieve user data from localStorage
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      
+      // Find user with matching email and password
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        // Store current user session
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        
+        if (remember) {
+          localStorage.setItem('rememberUser', JSON.stringify(user));
+        }
+        
+        // Redirect based on user role
+        if (user.role === 'admin') {
+          window.location.href = 'admin/dashboard.html';
+        } else {
+          window.location.href = 'user/dashboard.html';
+        }
+      } else {
+        showAlert('Invalid email or password', 'error');
+      }
+    });
+
+    function showAlert(message, type) {
+      const alertContainer = document.getElementById('alertContainer');
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      alertContainer.innerHTML = '';
+      alertContainer.appendChild(alert);
+      
+      setTimeout(() => alert.remove(), 4000);
+    }
+
+    // Load remembered user email
+    window.addEventListener('load', function() {
+      const remembered = localStorage.getItem('rememberUser');
+      if (remembered) {
+        const user = JSON.parse(remembered);
+        document.getElementById('email').value = user.email;
+        document.getElementById('remember').checked = true;
+      }
+    });
+  </script>
+</body>
+</html>
